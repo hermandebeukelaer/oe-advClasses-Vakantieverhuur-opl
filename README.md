@@ -13,7 +13,7 @@ We hebben de klassen ondergebracht in twee mappen:
 - **Entities**
 - **Services**
 
-De map **Entities** bevat de klassen die de nodig hebben om verblijven, personen en huurovereenkomsten te modelleren. De map **Services** bevat op zijn beurt de overeenkomstige klassen die we zullen gebruiken om de entiteiten te beheren: ze houden een lijst bij van alle aangemaakte objecten van de betreffende entiteit en bieden methoden aan om deze entities op te vragen of aan te passen (CRUD).
+De map **Entities** bevat de klassen die we nodig hebben om verblijven, personen en huurovereenkomsten te modelleren. De map **Services** bevat op zijn beurt de overeenkomstige klassen die we zullen gebruiken om de entiteiten te beheren: ze houden een lijst bij van alle aangemaakte objecten van de betreffende entiteit en bieden methoden aan om deze entities op te vragen of aan te passen (CRUD).
 
 > **Merk op:** we gebruiken hier dus dezelfde onderverdeling in entiteiten en services zoals we die geïntroduceerd hebben in het hoofdstuk over connected databases. Achter de services in deze oefening zit echter geen databank, ze slaan de aangemaakte objecten gewoon op in het lokale geheugen (en verliezen dus ook hun data als de applicatie opnieuw gestart wordt).
 >
