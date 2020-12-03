@@ -6,7 +6,7 @@ In deze oefening gaan we aan de slag met onze eigen geavanceerde klassen om een 
 
 ## Class library
 
-De solution bevat reeds een class library project met naam **Pra.Vakantieverhuur.CORE**. Hierin zijn ook reeds een aantal (hoofdzakelijk lege) klassen voorzien. De gewenste overerving tussen klaasen hebben we wel al voor jullie gedefinieerd.
+De solution bevat reeds een class library project met naam **Pra.Vakantieverhuur.CORE**. Hierin zijn ook reeds een aantal (hoofdzakelijk lege) klassen voorzien. De gewenste overerving tussen klassen hebben we wel al voor jullie gedefinieerd.
 
 We hebben de klassen ondergebracht in twee mappen:
 
