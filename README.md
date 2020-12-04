@@ -43,7 +43,7 @@ Gemeenschappelijke superklasse van de verschillende soorten verblijven. Heeft vo
 
 De constructor heeft **geen parameters** maar stelt wel de ID reeds in.
 
-#### HolidayHome
+#### VacationHouse
 
 Stelt een vakantiewoning voor en erft over van **Residence**. Aanvullende eigenschappen:
 
