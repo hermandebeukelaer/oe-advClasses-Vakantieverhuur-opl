@@ -23,16 +23,16 @@
                     <ComboBoxItem Content="Vakantiehuisjes"/>
                     <ComboBoxItem Content="Caravans"/>
                 </ComboBox>
-                <TextBox x:Name="txtHouseName" HorizontalAlignment="Left" Height="26" Margin="117.455,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="238" Grid.Column="1" />
-                <TextBox x:Name="txtStreetAndNumber" HorizontalAlignment="Left" Height="26" Margin="117.455,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="238" Grid.Column="1"/>
-                <TextBox x:Name="txtPastalCode" HorizontalAlignment="Left" Height="26" Margin="117.455,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74" MaxLength="4" Grid.Column="1"/>
-                <TextBox x:Name="txtTown" HorizontalAlignment="Left" Height="26" Margin="117.455,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="238" Grid.Column="1"/>
-                <TextBox x:Name="txtBasePrice" HorizontalAlignment="Left" Height="26" Margin="157,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" MaxLength="8" TextAlignment="Right"/>
-                <TextBox x:Name="txtReducedPrice" HorizontalAlignment="Left" Height="26" Margin="157,220,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" MaxLength="8" TextAlignment="Right"/>
-                <TextBox x:Name="txtDaysForReduction" HorizontalAlignment="Left" Height="26" Margin="157,251,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" MaxLength="3" TextAlignment="Right"/>
-                <TextBox x:Name="txtGuarantee" HorizontalAlignment="Left" Height="26" Margin="157,282,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" MaxLength="8" TextAlignment="Right"/>
+                <TextBox x:Name="txtHouseName" HorizontalAlignment="Left" Height="26" Margin="117.455,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="238" Grid.Column="1" TextChanged="ResidenceDetails_TextChanged" />
+                <TextBox x:Name="txtStreetAndNumber" HorizontalAlignment="Left" Height="26" Margin="117.455,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="238" Grid.Column="1" TextChanged="ResidenceDetails_TextChanged"/>
+                <TextBox x:Name="txtPastalCode" HorizontalAlignment="Left" Height="26" Margin="117.455,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74" MaxLength="4" Grid.Column="1" TextChanged="ResidenceDetails_TextChanged"/>
+                <TextBox x:Name="txtTown" HorizontalAlignment="Left" Height="26" Margin="117.455,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="238" Grid.Column="1" TextChanged="ResidenceDetails_TextChanged"/>
+                <TextBox x:Name="txtBasePrice" HorizontalAlignment="Left" Height="26" Margin="157,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" MaxLength="8" TextAlignment="Right" TextChanged="ResidenceDetails_TextChanged"/>
+                <TextBox x:Name="txtReducedPrice" HorizontalAlignment="Left" Height="26" Margin="157,220,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" MaxLength="8" TextAlignment="Right" TextChanged="ResidenceDetails_TextChanged"/>
+                <TextBox x:Name="txtDaysForReduction" HorizontalAlignment="Left" Height="26" Margin="157,251,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" MaxLength="3" TextAlignment="Right" TextChanged="ResidenceDetails_TextChanged"/>
+                <TextBox x:Name="txtGuarantee" HorizontalAlignment="Left" Height="26" Margin="157,282,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" MaxLength="8" TextAlignment="Right" TextChanged="ResidenceDetails_TextChanged"/>
                 <Label Content="Aantal personen : " HorizontalAlignment="Left" Height="26" Margin="10,326,0,0" VerticalAlignment="Top" Width="142" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="txtMaxPersons" HorizontalAlignment="Left" Height="26" Margin="157,326,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" MaxLength="2" TextAlignment="Right"/>
+                <TextBox x:Name="txtMaxPersons" HorizontalAlignment="Left" Height="26" Margin="157,326,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" MaxLength="2" TextAlignment="Right" TextChanged="ResidenceDetails_TextChanged"/>
                 <CheckBox x:Name="chkMicrowave" Content="Microgolf" HorizontalAlignment="Left" Height="15" Margin="372.455,189,0,0" VerticalAlignment="Top" Width="226" Grid.Column="1"/>
                 <CheckBox x:Name="chkTV" Content="TV" HorizontalAlignment="Left" Height="15" Margin="372.455,208,0,0" VerticalAlignment="Top" Width="226" Grid.Column="1"/>
                 <CheckBox x:Name="chkDishwasher" Content="Vaatwas" HorizontalAlignment="Left" Height="15" Margin="372.455,228,0,0" VerticalAlignment="Top" Width="226" Grid.Column="1"/>

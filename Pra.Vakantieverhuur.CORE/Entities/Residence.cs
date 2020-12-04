@@ -18,7 +18,7 @@ namespace Pra.Vakantieverhuur.CORE.Entities
             { 
                 if(value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("BasePrice", "Prijs mag niet negatief zijn");
+                    value = 0;
                 }
                 basePrice = value; 
             }
@@ -33,7 +33,7 @@ namespace Pra.Vakantieverhuur.CORE.Entities
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("ReducedPrice", "Prijs mag niet negatief zijn");
+                    value = 0;
                 }
                 reducedPrice = value;
             }
@@ -48,11 +48,11 @@ namespace Pra.Vakantieverhuur.CORE.Entities
             { 
                 if(value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("DaysForReduction", "Aantal dagen mag niet negatief zijn");
+                    value = 0;
                 }
                 if(value > 100)
                 {
-                    throw new ArgumentOutOfRangeException("ReducedPrice", "Aantal dagen tot kortingsprijs mag niet hoger zijn dan 100");
+                    value = 100;
                 }
                 daysForReduction = value; 
             }
@@ -67,7 +67,7 @@ namespace Pra.Vakantieverhuur.CORE.Entities
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("Deposit", "Waarborg mag niet negatief zijn");
+                    value = 0;
                 }
                 deposit = value;
             }
@@ -80,9 +80,13 @@ namespace Pra.Vakantieverhuur.CORE.Entities
             get { return maxPersons; }
             set
             {
-                if(value < 1 || value > 20)
+                if(value < 1)
                 {
-                    throw new ArgumentOutOfRangeException("MaxPersons", "Maximaal aantal personen moet een waarden van 1 t/m 20 hebben.");
+                    value = 1;
+                }
+                if(value > 20)
+                {
+                    value = 20;
                 }
                 maxPersons = value;
             }

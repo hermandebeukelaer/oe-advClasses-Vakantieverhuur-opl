@@ -99,6 +99,18 @@ namespace Pra.Vakantieverhuur.WPF
             }
         }
 
+        private void ShowError(Control control)
+        {
+            control.Foreground = Brushes.Red;
+            control.BorderBrush = Brushes.Red;
+        }
+
+        private void ShowOk(Control control)
+        {
+            control.Foreground = Brushes.Black;
+            control.BorderBrush = Brushes.Black;
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ShowDetails();
@@ -112,39 +124,124 @@ namespace Pra.Vakantieverhuur.WPF
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
 
-            bool addingNewResidence = (Residence == null);
-            if(addingNewResidence)
-            {
+            // start with parsing all values (including error checks)
+            bool errors = false;
 
-                ComboBoxItem selectedKind = (ComboBoxItem) cmbKindOfResidence.SelectedItem;
-                if(selectedKind.Content.ToString() == "Vakantiehuisjes")
-                {
-                    Residence = new VacationHouse();
-                }
-                else
-                {
-                    Residence = new Caravan();
-                }
+            if (string.IsNullOrWhiteSpace(txtHouseName.Text))
+            {
+                errors = true;
+                ShowError(txtHouseName);
+            }
+
+            if (string.IsNullOrWhiteSpace(txtStreetAndNumber.Text))
+            {
+                errors = true;
+                ShowError(txtStreetAndNumber);
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPastalCode.Text))
+            {
+                errors = true;
+                ShowError(txtPastalCode);
+            }
+
+            if (string.IsNullOrWhiteSpace(txtTown.Text))
+            {
+                errors = true;
+                ShowError(txtTown);
+            }
+
+            decimal basePrice = 0m;
+            decimal reducedPrice = 0m;
+            decimal deposit = 0m;
+
+            try
+            {
+                basePrice = decimal.Parse(txtBasePrice.Text);
+                if (basePrice < 0) throw new ArgumentOutOfRangeException();
+            }
+            catch
+            {
+                errors = true;
+                ShowError(txtBasePrice);
             }
 
             try
             {
-                Residence.IsRentable = chkRentable.IsChecked == true;
+                reducedPrice = decimal.Parse(txtReducedPrice.Text);
+                if (reducedPrice < 0) throw new ArgumentOutOfRangeException();
+            }
+            catch
+            {
+                errors = true;
+                ShowError(txtReducedPrice);
+            }
 
+            try
+            {
+                deposit = decimal.Parse(txtGuarantee.Text);
+                if (deposit < 0) throw new ArgumentOutOfRangeException();
+            }
+            catch
+            {
+                errors = true;
+                ShowError(txtGuarantee);
+            }
+
+            byte numDaysBasePrice = 0;
+            try
+            {
+                numDaysBasePrice = byte.Parse(txtDaysForReduction.Text);
+            }
+            catch
+            {
+                errors = true;
+                ShowError(txtDaysForReduction);
+            }
+
+            int maxPersons = 0;
+            try
+            {
+                maxPersons = int.Parse(txtMaxPersons.Text);
+                if (maxPersons < 0) throw new ArgumentOutOfRangeException();
+            }
+            catch
+            {
+                errors = true;
+                ShowError(txtMaxPersons);
+            }
+
+            if (!errors)
+            {
+                // when adding a new residence, we must create the object first
+                if (Residence == null)
+                {
+                    ComboBoxItem selectedKind = (ComboBoxItem)cmbKindOfResidence.SelectedItem;
+                    if (selectedKind.Content.ToString() == "Vakantiehuisjes")
+                    {
+                        Residence = new VacationHouse();
+                    }
+                    else
+                    {
+                        Residence = new Caravan();
+                    }
+                }
+
+                // set/update all property values
                 Residence.ResidenceName = txtHouseName.Text;
                 Residence.StreetAndNumber = txtStreetAndNumber.Text;
                 Residence.PostalCode = txtPastalCode.Text;
                 Residence.Town = txtTown.Text;
 
-                Residence.BasePrice = decimal.Parse(txtBasePrice.Text);
-                Residence.ReducedPrice = decimal.Parse(txtReducedPrice.Text);
-                Residence.DaysForReduction = byte.Parse(txtDaysForReduction.Text);
-                Residence.Deposit = decimal.Parse(txtGuarantee.Text);
-
-                Residence.MaxPersons = int.Parse(txtMaxPersons.Text);
-
+                Residence.IsRentable = chkRentable.IsChecked == true;
                 Residence.Microwave = chkMicrowave.IsChecked;
                 Residence.TV = chkTV.IsChecked;
+
+                Residence.BasePrice = basePrice;
+                Residence.ReducedPrice = reducedPrice;
+                Residence.DaysForReduction = numDaysBasePrice;
+                Residence.Deposit = deposit;
+                Residence.MaxPersons = maxPersons;
 
                 if (Residence is Caravan caravan)
                 {
@@ -160,15 +257,6 @@ namespace Pra.Vakantieverhuur.WPF
 
                 Close();
             }
-            catch
-            {
-                MessageBox.Show("Something went wrong?!");
-                if(addingNewResidence)
-                {
-                    Residence = null;
-                }
-            }
-
             
         }
 
@@ -187,6 +275,11 @@ namespace Pra.Vakantieverhuur.WPF
                 }
             }
             
+        }
+
+        private void ResidenceDetails_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ShowOk((Control)sender);
         }
     }
 }
