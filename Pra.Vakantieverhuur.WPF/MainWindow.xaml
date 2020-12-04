@@ -24,15 +24,15 @@
         <GroupBox  x:Name="grpVerhuur" Header="Verhuur" HorizontalAlignment="Left" Height="399" Margin="286,10,0,0" VerticalAlignment="Top" Width="679">
             <Grid>
                 <Button x:Name="btnNewRental" Content="Nieuw verhuur" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" VerticalAlignment="Top" Width="131" Click="BtnNewRental_Click" />
-                <DataGrid x:Name="dgrRentals" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="299" Margin="10,68,0,0" VerticalAlignment="Top" Width="647" CanUserAddRows="False">
+                <DataGrid x:Name="dgrRentals" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="299" Margin="10,68,0,0" VerticalAlignment="Top" Width="647">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Van" Binding="{Binding DatumVan, StringFormat=\{0:dd/MM/yyyy\}}" />
-                        <DataGridTextColumn Header="Tot" Binding="{Binding DatumTot, StringFormat=\{0:dd/MM/yyyy\}}" />
-                        <DataGridTextColumn Header="Naam" Binding="{Binding DeHuurder.Naam}" />
-                        <DataGridTextColumn Header="Voornaam" Binding="{Binding DeHuurder.Voornaam}" />
-                        <DataGridTextColumn Header="Te betalen" Binding="{Binding Tebetalen}" />
-                        <DataGridTextColumn Header="Reeds betaald" Binding="{Binding Betaald}" />
-                        <DataGridTextColumn Header="Waarborg voldaan" Binding="{Binding WaarborgGestort}" />
+                        <DataGridTextColumn Header="Van" Binding="{Binding DateStart, StringFormat=\{0:dd/MM/yyyy\}}" />
+                        <DataGridTextColumn Header="Tot" Binding="{Binding DateEnd, StringFormat=\{0:dd/MM/yyyy\}}" />
+                        <DataGridTextColumn Header="Naam" Binding="{Binding HolidayTenant.Name}" />
+                        <DataGridTextColumn Header="Voornaam" Binding="{Binding HolidayTenant.Firstname}" />
+                        <DataGridTextColumn Header="Te betalen" Binding="{Binding ToPay}" />
+                        <DataGridTextColumn Header="Reeds betaald" Binding="{Binding Paid}" />
+                        <DataGridTextColumn Header="Waarborg voldaan" Binding="{Binding IsDepositPaid}" />
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

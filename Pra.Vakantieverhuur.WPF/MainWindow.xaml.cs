@@ -61,7 +61,11 @@ namespace Pra.Vakantieverhuur.WPF
 
         private void UpdateRentals()
         {
-            dgrRentals.ItemsSource = rentals.AllRentals;
+            dgrRentals.Items.Clear();
+            foreach(Rental rental in rentals.AllRentals)
+            {
+                dgrRentals.Items.Add(rental);
+            }
         }
 
         #endregion
