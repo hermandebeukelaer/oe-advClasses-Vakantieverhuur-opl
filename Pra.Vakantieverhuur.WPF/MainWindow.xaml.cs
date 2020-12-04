@@ -25,6 +25,7 @@ namespace Pra.Vakantieverhuur.WPF
 
         private readonly Residences residences = new Residences();
         private readonly Rentals rentals = new Rentals();
+        private readonly Tenants tenants = new Tenants();
 
         public MainWindow()
         {
@@ -119,7 +120,7 @@ namespace Pra.Vakantieverhuur.WPF
                     return;
                 }
 
-                Window rentalWindow = new WinRental();
+                Window rentalWindow = new WinRental(residence, rentals, tenants);
                 rentalWindow.ShowDialog();
                 UpdateRentals();
             }

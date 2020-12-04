@@ -24,8 +24,8 @@ namespace Pra.Vakantieverhuur.CORE.Entities
         public decimal CalculateTotalPrice()
         {
             int totalNights = CalculateNumberOfNights();
-            int nightsReducedPrice = Math.Min(totalNights, HolidayResidence.DaysForReduction);
-            int nightsFullPrice = totalNights - nightsReducedPrice;
+            int nightsFullPrice = Math.Min(totalNights, HolidayResidence.DaysForReduction);
+            int nightsReducedPrice = totalNights - nightsFullPrice;
 
             return nightsReducedPrice * HolidayResidence.ReducedPrice + nightsFullPrice * HolidayResidence.BasePrice;
         }

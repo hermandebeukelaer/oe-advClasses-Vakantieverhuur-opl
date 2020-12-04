@@ -24,7 +24,7 @@
         <GroupBox  x:Name="grpVerhuur" Header="Verhuur" HorizontalAlignment="Left" Height="399" Margin="286,10,0,0" VerticalAlignment="Top" Width="679">
             <Grid>
                 <Button x:Name="btnNewRental" Content="Nieuw verhuur" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" VerticalAlignment="Top" Width="131" Click="BtnNewRental_Click" />
-                <DataGrid x:Name="dgrRentals" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="299" Margin="10,68,0,0" VerticalAlignment="Top" Width="647">
+                <DataGrid x:Name="dgrRentals" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="299" Margin="10,68,0,0" VerticalAlignment="Top" Width="647" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Van" Binding="{Binding DatumVan, StringFormat=\{0:dd/MM/yyyy\}}" />
                         <DataGridTextColumn Header="Tot" Binding="{Binding DatumTot, StringFormat=\{0:dd/MM/yyyy\}}" />
