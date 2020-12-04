@@ -19,6 +19,37 @@ namespace Pra.Vakantieverhuur.CORE.Services
             GenerateResidences();
         }
 
+        public List<Residence> GetAllVacationHouses()
+        {
+            List<Residence> vacationHouses = new List<Residence>();
+            foreach (Residence residence in AllResidences)
+            {
+                if(residence is VacationHouse house)
+                {
+                    vacationHouses.Add(house);
+                }
+            }
+            return vacationHouses;
+        }
+
+        public List<Residence> GetAllCaravans()
+        {
+
+            List<Residence> caravans = new List<Residence>();
+            foreach (Residence residence in AllResidences)
+            {
+                /*if (residence is Caravan)
+                {
+                    caravans.Add(residence);
+                }*/
+                if (residence is Caravan caravan)
+                {
+                    caravans.Add(caravan);
+                }
+            }
+            return caravans;
+        }
+
         private void GenerateResidences()
         {
             AllResidences.Add(new VacationHouse

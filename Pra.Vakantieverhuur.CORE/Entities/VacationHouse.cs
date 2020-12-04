@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Pra.Vakantieverhuur.CORE.Entities
 {
-    class VacationHouse : Residence
+    public class VacationHouse : Residence
     {
 
         public bool? DishWasher { get; set; }

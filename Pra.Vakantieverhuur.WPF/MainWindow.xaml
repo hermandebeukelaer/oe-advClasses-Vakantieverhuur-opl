@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pra.Vakantieverhuur.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="982.582">
+        Title="MainWindow" Height="450" Width="982.582" Loaded="Window_Loaded">
     <Grid>
         <GroupBox Header="Verblijven" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" VerticalAlignment="Top" Width="271">
             <Grid>
                 <ListBox x:Name="lstResidences" HorizontalAlignment="Left" Height="298" Margin="10,68,0,0" VerticalAlignment="Top" Width="239"/>
-                <ComboBox x:Name="cmbKindOfResidence" HorizontalAlignment="Left" Height="23" Margin="11,40,0,0" VerticalAlignment="Top" Width="238" SelectedIndex="0" >
+                <ComboBox x:Name="cmbKindOfResidence" HorizontalAlignment="Left" Height="23" Margin="11,40,0,0" VerticalAlignment="Top" Width="238" SelectedIndex="0" SelectionChanged="CmbKindOfResidence_SelectionChanged" >
                     <ComboBoxItem Content="Alle verblijven"/>
                     <ComboBoxItem Content="Vakantiehuisjes"/>
                     <ComboBoxItem Content="Caravans"/>
