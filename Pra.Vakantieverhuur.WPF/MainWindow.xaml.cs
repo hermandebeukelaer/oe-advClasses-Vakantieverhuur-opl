@@ -150,5 +150,16 @@ namespace Pra.Vakantieverhuur.WPF
                 UpdateRentals();
             }
         }
+
+        private void BtnRentalEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Button deleteButton = (Button)sender;
+            Rental rental = (Rental)deleteButton.DataContext;
+
+            WinRental rentalWindow = new WinRental(rental, rentals, tenants);
+            rentalWindow.ShowDialog();
+            UpdateRentals();
+
+        }
     }
 }

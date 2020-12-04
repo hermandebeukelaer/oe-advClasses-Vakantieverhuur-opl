@@ -34,6 +34,12 @@ namespace Pra.Vakantieverhuur.WPF
             InitializeComponent();
         }
 
+        public WinRental(Rental rental, Rentals rentals, Tenants tenants) : this(rental.HolidayResidence, rentals, tenants)
+        {
+            Rental = rental;
+            FillRentalDetails();
+        }
+
         private void ShowResidenceInfo()
         {
             txtResidenceName.Text = residence.ResidenceName;
@@ -75,7 +81,18 @@ namespace Pra.Vakantieverhuur.WPF
             cmbTenant.SelectedIndex = 0;
         }
 
-        private void UpdateRentalDetails()
+        private void FillRentalDetails()
+        {
+
+            cmbTenant.SelectedItem = Rental.HolidayTenant;
+            dtpDateStart.SelectedDate = Rental.DateStart;
+            dtpDateEnd.SelectedDate = Rental.DateEnd;
+            txtPaid.Text = Rental.Paid.ToString("0.00");
+            InferAdditionalRentalDetails();
+
+        }
+
+        private void InferAdditionalRentalDetails()
         {
             DateTime? start = dtpDateStart.SelectedDate;
             DateTime? end = dtpDateEnd.SelectedDate;
@@ -97,7 +114,7 @@ namespace Pra.Vakantieverhuur.WPF
                 HolidayResidence = residence
             };
 
-            if (rentals.IsOverbooking(rental))
+            if (rentals.IsOverbooking(rental, Rental))
             {
                 lblOverbooking.Content = "OVERBOEKING!";
                 ShowError(lblOverbooking);
@@ -158,19 +175,19 @@ namespace Pra.Vakantieverhuur.WPF
 
         private void DtpDateStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateRentalDetails();
+            InferAdditionalRentalDetails();
             ShowOk(dtpDateStart);
         }
 
         private void DtpDateEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateRentalDetails();
+            InferAdditionalRentalDetails();
             ShowOk(dtpDateEnd);
         }
 
         private void TxtPaid_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateRentalDetails();
+            InferAdditionalRentalDetails();
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -184,7 +201,7 @@ namespace Pra.Vakantieverhuur.WPF
             // error handling
             bool errors = false;
 
-            if(lblOverbooking.Content != "")
+            if(lblOverbooking.Content.ToString() != "")
             {
                 // do not save double booked rentals!
                 errors = true;
@@ -227,20 +244,25 @@ namespace Pra.Vakantieverhuur.WPF
 
             if (!errors)
             {
-                Rental = new Rental
+
+                if(Rental == null)
                 {
-                    HolidayTenant = (Tenant)cmbTenant.SelectedItem,
+                    // creating new rental
+                    Rental = new Rental();
+                }
 
-                    DateStart = dtpDateStart.SelectedDate.Value,
-                    DateEnd = dtpDateEnd.SelectedDate.Value,
+                Rental.HolidayTenant = (Tenant)cmbTenant.SelectedItem;
 
-                    HolidayResidence = residence,
+                Rental.DateStart = dtpDateStart.SelectedDate.Value;
+                Rental.DateEnd = dtpDateEnd.SelectedDate.Value;
 
-                    IsDepositPaid = chkDepositPaid.IsChecked == true,
+                Rental.HolidayResidence = residence;
 
-                    Paid = paid,
-                    ToPay = toPay
-                };
+                Rental.IsDepositPaid = chkDepositPaid.IsChecked == true;
+
+                Rental.Paid = paid;
+                Rental.ToPay = toPay;
+
                 Close();
             }
 
