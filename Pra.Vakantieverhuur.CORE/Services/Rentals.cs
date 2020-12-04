@@ -17,5 +17,23 @@ namespace Pra.Vakantieverhuur.CORE.Services
         {
             allRentals = new List<Rental>();
         }
+
+        public bool IsOverbooking(Rental newRental)
+        {
+            foreach(Rental rental in AllRentals)
+            {
+                if(rental.HolidayResidence == newRental.HolidayResidence)
+                {
+                    // other rental found for same house: check overlap
+                    bool overlap = !(newRental.DateStart >= rental.DateEnd || newRental.DateEnd <= rental.DateStart);
+                    if (overlap)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
     }
 }
