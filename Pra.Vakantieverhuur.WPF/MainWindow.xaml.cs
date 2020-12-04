@@ -93,8 +93,17 @@ namespace Pra.Vakantieverhuur.WPF
             if(lstResidences.SelectedItem != null)
             {
                 Residence selected = (Residence)lstResidences.SelectedItem;
-                residences.Remove(selected);
-                UpdateResidences();
+                if (residences.Remove(selected, rentals))
+                {
+                    UpdateResidences();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Kan vakantieverblijf niet verwijderen wegens actieve huurovereenkomsten. Verwijder eerst alle huurovereenkomsten.",
+                        "Verwijderen mislukt!", MessageBoxButton.OK, MessageBoxImage.Exclamation
+                    );
+                }
             }
         }
 

@@ -50,8 +50,18 @@ namespace Pra.Vakantieverhuur.CORE.Services
             return caravans;
         }
 
-        public bool Remove(Residence residence)
+        public bool Remove(Residence residence, Rentals rentals)
         {
+
+            // check if still used in rentals: can't remove then!
+            foreach(Rental rental in rentals.AllRentals)
+            {
+                if(rental.HolidayResidence == residence)
+                {
+                    return false;
+                }
+            }
+
             return AllResidences.Remove(residence);
         }
 
