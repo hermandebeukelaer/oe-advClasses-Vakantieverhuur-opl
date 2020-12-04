@@ -133,5 +133,22 @@ namespace Pra.Vakantieverhuur.WPF
                 UpdateRentals();
             }
         }
+
+        private void BtnRentalDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Button deleteButton = (Button)sender;
+            Rental rental = (Rental)deleteButton.DataContext;
+
+            MessageBoxResult result = MessageBox.Show(
+                "Ben je zeker dat je deze huurovereenkomst wil verwijderen?", "Huurovereenkomst verwijderen?",
+                MessageBoxButton.YesNo, MessageBoxImage.Question
+            );
+
+            if(result == MessageBoxResult.Yes)
+            {
+                rentals.Remove(rental);
+                UpdateRentals();
+            }
+        }
     }
 }

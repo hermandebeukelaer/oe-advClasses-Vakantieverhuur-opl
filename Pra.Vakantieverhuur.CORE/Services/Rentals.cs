@@ -40,5 +40,10 @@ namespace Pra.Vakantieverhuur.CORE.Services
             AllRentals.Add(rental);
         }
 
+        public bool Remove(Rental rental)
+        {
+            return AllRentals.Remove(rental);
+        }
+
     }
 }
