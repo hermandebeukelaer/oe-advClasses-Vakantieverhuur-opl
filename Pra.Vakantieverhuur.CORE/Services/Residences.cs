@@ -55,6 +55,11 @@ namespace Pra.Vakantieverhuur.CORE.Services
             return AllResidences.Remove(residence);
         }
 
+        public void Add(Residence residence)
+        {
+            AllResidences.Add(residence);
+        }
+
         private void GenerateResidences()
         {
             AllResidences.Add(new VacationHouse

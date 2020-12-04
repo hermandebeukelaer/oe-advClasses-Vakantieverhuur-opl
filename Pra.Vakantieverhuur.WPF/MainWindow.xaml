@@ -15,15 +15,15 @@
                     <ComboBoxItem Content="Vakantiehuisjes"/>
                     <ComboBoxItem Content="Caravans"/>
                 </ComboBox>
-                <Button x:Name="btnResidenceNew" Content="New" HorizontalAlignment="Left" Height="25" Margin="11,10,0,0" VerticalAlignment="Top" Width="56"/>
-                <Button x:Name="btnResidenceEdit"  Content="Edit" HorizontalAlignment="Left" Height="25" Margin="72,10,0,0" VerticalAlignment="Top" Width="56"/>
+                <Button x:Name="btnResidenceNew" Content="New" HorizontalAlignment="Left" Height="25" Margin="11,10,0,0" VerticalAlignment="Top" Width="56" Click="BtnResidenceNew_Click"/>
+                <Button x:Name="btnResidenceEdit"  Content="Edit" HorizontalAlignment="Left" Height="25" Margin="72,10,0,0" VerticalAlignment="Top" Width="56" Click="BtnResidenceEdit_Click"/>
                 <Button x:Name="btnResidenceDelete"  Content="Delete" HorizontalAlignment="Left" Height="25" Margin="133,10,0,0" VerticalAlignment="Top" Width="56" Click="BtnResidenceDelete_Click" />
 
             </Grid>
         </GroupBox>
         <GroupBox  x:Name="grpVerhuur" Header="Verhuur" HorizontalAlignment="Left" Height="399" Margin="286,10,0,0" VerticalAlignment="Top" Width="679">
             <Grid>
-                <Button x:Name="btnNewRental" Content="Nieuw verhuur" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" VerticalAlignment="Top" Width="131" />
+                <Button x:Name="btnNewRental" Content="Nieuw verhuur" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" VerticalAlignment="Top" Width="131" Click="BtnNewRental_Click" />
                 <DataGrid x:Name="dgrRentals" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="299" Margin="10,68,0,0" VerticalAlignment="Top" Width="647">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Van" Binding="{Binding DatumVan, StringFormat=\{0:dd/MM/yyyy\}}" />

@@ -24,6 +24,7 @@ namespace Pra.Vakantieverhuur.WPF
     {
 
         private readonly Residences residences = new Residences();
+        private readonly Rentals rentals = new Rentals();
 
         public MainWindow()
         {
@@ -57,6 +58,11 @@ namespace Pra.Vakantieverhuur.WPF
             lstResidences.Items.Refresh();
         }
 
+        private void UpdateRentals()
+        {
+            dgrRentals.ItemsSource = rentals.AllRentals;
+        }
+
         #endregion
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -76,6 +82,46 @@ namespace Pra.Vakantieverhuur.WPF
                 Residence selected = (Residence)lstResidences.SelectedItem;
                 residences.Remove(selected);
                 UpdateResidences();
+            }
+        }
+
+        private void BtnResidenceEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if(lstResidences.SelectedItem != null)
+            {
+                Residence residence = (Residence)lstResidences.SelectedItem;
+                Window residenceWindow = new WinResidences(residence);
+                residenceWindow.ShowDialog();
+                UpdateResidences();
+            }
+        }
+
+        private void BtnResidenceNew_Click(object sender, RoutedEventArgs e)
+        {
+            WinResidences residenceWindow = new WinResidences();
+            residenceWindow.ShowDialog();
+            if(residenceWindow.Residence != null)
+            {
+                residences.Add(residenceWindow.Residence);
+            }
+            UpdateResidences();
+        }
+
+        private void BtnNewRental_Click(object sender, RoutedEventArgs e)
+        {
+            if(lstResidences.SelectedItem != null)
+            {
+                Residence residence = (Residence)lstResidences.SelectedItem;
+
+                if(!residence.IsRentable)
+                {
+                    MessageBox.Show($"Verblijf {residence} momenteel niet verhuurbaar...");
+                    return;
+                }
+
+                Window rentalWindow = new WinRental();
+                rentalWindow.ShowDialog();
+                UpdateRentals();
             }
         }
     }
