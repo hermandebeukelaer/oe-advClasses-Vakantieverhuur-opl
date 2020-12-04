@@ -120,8 +120,12 @@ namespace Pra.Vakantieverhuur.WPF
                     return;
                 }
 
-                Window rentalWindow = new WinRental(residence, rentals, tenants);
+                WinRental rentalWindow = new WinRental(residence, rentals, tenants);
                 rentalWindow.ShowDialog();
+                if(rentalWindow.Rental != null)
+                {
+                    rentals.Add(rentalWindow.Rental);
+                }
                 UpdateRentals();
             }
         }

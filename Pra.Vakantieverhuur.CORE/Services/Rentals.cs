@@ -35,5 +35,10 @@ namespace Pra.Vakantieverhuur.CORE.Services
             return false;
         }
 
+        public void Add(Rental rental)
+        {
+            AllRentals.Add(rental);
+        }
+
     }
 }

@@ -24,6 +24,8 @@ namespace Pra.Vakantieverhuur.WPF
         private readonly Rentals rentals;
         private readonly Residence residence;
 
+        public Rental Rental { get; private set; }
+
         public WinRental(Residence residence, Rentals rentals, Tenants tenants)
         {
             this.residence = residence;
@@ -98,6 +100,7 @@ namespace Pra.Vakantieverhuur.WPF
             if (rentals.IsOverbooking(rental))
             {
                 lblOverbooking.Content = "OVERBOEKING!";
+                ShowError(lblOverbooking);
             }
 
             lblNumberOfOvernightStays.Content = rental.CalculateNumberOfNights();
@@ -107,28 +110,44 @@ namespace Pra.Vakantieverhuur.WPF
 
             try
             {
-                decimal paid = decimal.Parse(txtPaid.Text);
-                if(paid < 0)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
+                decimal paid = ParsePaid(totalPrice);
                 decimal toPay = totalPrice - paid;
-                if(toPay >= 0)
-                {
-                    lblToBePaid.Content = toPay.ToString("0.00");
-                    lblToBePaid.Foreground = Brushes.Black;
-                }
-                else
-                {
-                    lblToBePaid.Content = "Te veel betaald!";
-                    lblToBePaid.Foreground = Brushes.Red;
-                }
+                lblToBePaid.Content = toPay.ToString("0.00");
+                ShowOk(lblToBePaid);
+                ShowOk(txtPaid);
             }
             catch
             {
-                lblToBePaid.Content = "Vul een geldige waarde in bij \"Reeds betaald\"";
-                lblToBePaid.Foreground = Brushes.Red;
+                lblToBePaid.Content = "???";
+                ShowError(lblToBePaid);
+                ShowError(txtPaid);
             }
+        }
+
+        private decimal ParsePaid(decimal totalPrice)
+        {
+            decimal paid = decimal.Parse(txtPaid.Text);
+            if (paid < 0)
+            {
+                throw new ArgumentOutOfRangeException(null, "Betaald bedrag kan niet kleiner dan nul zijn.");
+            }
+            if(paid > totalPrice)
+            {
+                throw new ArgumentOutOfRangeException(null, "Te veel betaald.");
+            }
+            return paid;
+        }
+
+        private void ShowError(Control control)
+        {
+            control.Foreground = Brushes.Red;
+            control.BorderBrush = Brushes.Red;
+        }
+
+        private void ShowOk(Control control)
+        {
+            control.Foreground = Brushes.Black;
+            control.BorderBrush = Brushes.Black;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -140,16 +159,91 @@ namespace Pra.Vakantieverhuur.WPF
         private void DtpDateStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateRentalDetails();
+            ShowOk(dtpDateStart);
         }
 
         private void DtpDateEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateRentalDetails();
+            ShowOk(dtpDateEnd);
         }
 
         private void TxtPaid_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateRentalDetails();
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+            // error handling
+            bool errors = false;
+
+            if(lblOverbooking.Content != "")
+            {
+                // do not save double booked rentals!
+                errors = true;
+            }
+
+            if(dtpDateStart.SelectedDate == null)
+            {
+                errors = true;
+                ShowError(dtpDateStart);
+            }
+            else
+            {
+                ShowOk(dtpDateStart);
+            }
+
+            if (dtpDateEnd.SelectedDate == null)
+            {
+                errors = true;
+                ShowError(dtpDateEnd);
+            }
+            else
+            {
+                ShowOk(dtpDateEnd);
+            }
+
+            decimal paid = 0m;
+            decimal toPay = 0m;
+            try
+            {
+                decimal totalPrice = decimal.Parse(lblTotalToPay.Content.ToString());
+                paid = ParsePaid(totalPrice);
+                toPay = totalPrice - paid;
+                ShowOk(txtPaid);
+            }
+            catch
+            {
+                errors = true;
+                ShowError(txtPaid);
+            }
+
+            if (!errors)
+            {
+                Rental = new Rental
+                {
+                    HolidayTenant = (Tenant)cmbTenant.SelectedItem,
+
+                    DateStart = dtpDateStart.SelectedDate.Value,
+                    DateEnd = dtpDateEnd.SelectedDate.Value,
+
+                    HolidayResidence = residence,
+
+                    IsDepositPaid = chkDepositPaid.IsChecked == true,
+
+                    Paid = paid,
+                    ToPay = toPay
+                };
+                Close();
+            }
+
         }
     }
 }
