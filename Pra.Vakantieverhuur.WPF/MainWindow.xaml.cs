@@ -62,9 +62,17 @@ namespace Pra.Vakantieverhuur.WPF
         private void UpdateRentals()
         {
             dgrRentals.Items.Clear();
-            foreach(Rental rental in rentals.AllRentals)
+
+            Residence selectedResidence = (Residence)lstResidences.SelectedItem;
+            if(selectedResidence != null)
             {
-                dgrRentals.Items.Add(rental);
+                foreach (Rental rental in rentals.AllRentals)
+                {
+                    if(rental.HolidayResidence == selectedResidence)
+                    {
+                        dgrRentals.Items.Add(rental);
+                    }
+                }
             }
         }
 
@@ -160,6 +168,11 @@ namespace Pra.Vakantieverhuur.WPF
             rentalWindow.ShowDialog();
             UpdateRentals();
 
+        }
+
+        private void LstResidences_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateRentals();
         }
     }
 }

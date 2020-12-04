@@ -9,7 +9,7 @@
     <Grid>
         <GroupBox Header="Verblijven" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" VerticalAlignment="Top" Width="271">
             <Grid>
-                <ListBox x:Name="lstResidences" HorizontalAlignment="Left" Height="298" Margin="10,68,0,0" VerticalAlignment="Top" Width="239"/>
+                <ListBox x:Name="lstResidences" HorizontalAlignment="Left" Height="298" Margin="10,68,0,0" VerticalAlignment="Top" Width="239" SelectionChanged="LstResidences_SelectionChanged"/>
                 <ComboBox x:Name="cmbKindOfResidence" HorizontalAlignment="Left" Height="23" Margin="11,40,0,0" VerticalAlignment="Top" Width="238" SelectedIndex="0" SelectionChanged="CmbKindOfResidence_SelectionChanged" >
                     <ComboBoxItem Content="Alle verblijven"/>
                     <ComboBoxItem Content="Vakantiehuisjes"/>
