@@ -34,12 +34,27 @@ namespace Pra.Vakantieverhuur.WPF
 
         private void UpdateResidences()
         {
-            UpdateResidences(residences.AllResidences);
-        }
-
-        private void UpdateResidences(List<Residence> residences)
-        {
-            lstResidences.ItemsSource = residences;
+            if (cmbKindOfResidence.SelectedItem != null)
+            {
+                ComboBoxItem selectedKind = (ComboBoxItem)cmbKindOfResidence.SelectedItem;
+                switch (selectedKind.Content)
+                {
+                    case "Vakantiehuisjes":
+                        lstResidences.ItemsSource = residences.GetAllVacationHouses();
+                        break;
+                    case "Caravans":
+                        lstResidences.ItemsSource = residences.GetAllCaravans();
+                        break;
+                    default:
+                        lstResidences.ItemsSource = residences.AllResidences;
+                        break;
+                }
+            }
+            else
+            {
+                lstResidences.ItemsSource = residences.AllResidences;
+            }
+            lstResidences.Items.Refresh();
         }
 
         #endregion
@@ -51,21 +66,16 @@ namespace Pra.Vakantieverhuur.WPF
 
         private void CmbKindOfResidence_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(cmbKindOfResidence.SelectedItem != null)
+            UpdateResidences();
+        }
+
+        private void BtnResidenceDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if(lstResidences.SelectedItem != null)
             {
-                ComboBoxItem selectedKind = (ComboBoxItem) cmbKindOfResidence.SelectedItem;
-                switch (selectedKind.Content)
-                {
-                    case "Vakantiehuisjes":
-                        UpdateResidences(residences.GetAllVacationHouses());
-                        break;
-                    case "Caravans":
-                        UpdateResidences(residences.GetAllCaravans());
-                        break;
-                    default:
-                        UpdateResidences();
-                        break;
-                }
+                Residence selected = (Residence)lstResidences.SelectedItem;
+                residences.Remove(selected);
+                UpdateResidences();
             }
         }
     }

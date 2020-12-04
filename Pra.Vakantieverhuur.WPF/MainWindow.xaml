@@ -17,7 +17,7 @@
                 </ComboBox>
                 <Button x:Name="btnResidenceNew" Content="New" HorizontalAlignment="Left" Height="25" Margin="11,10,0,0" VerticalAlignment="Top" Width="56"/>
                 <Button x:Name="btnResidenceEdit"  Content="Edit" HorizontalAlignment="Left" Height="25" Margin="72,10,0,0" VerticalAlignment="Top" Width="56"/>
-                <Button x:Name="btnResidenceDelete"  Content="Delete" HorizontalAlignment="Left" Height="25" Margin="133,10,0,0" VerticalAlignment="Top" Width="56" />
+                <Button x:Name="btnResidenceDelete"  Content="Delete" HorizontalAlignment="Left" Height="25" Margin="133,10,0,0" VerticalAlignment="Top" Width="56" Click="BtnResidenceDelete_Click" />
 
             </Grid>
         </GroupBox>

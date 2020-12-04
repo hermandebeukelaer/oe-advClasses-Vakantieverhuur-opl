@@ -50,6 +50,11 @@ namespace Pra.Vakantieverhuur.CORE.Services
             return caravans;
         }
 
+        public bool Remove(Residence residence)
+        {
+            return AllResidences.Remove(residence);
+        }
+
         private void GenerateResidences()
         {
             AllResidences.Add(new VacationHouse
